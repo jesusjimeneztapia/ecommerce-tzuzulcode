@@ -1,26 +1,28 @@
-import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
+import { initializeApp, firestore, apps } from 'firebase/app'
+import 'firebase/firestore'
 import {
-	FIREBASE_APIKEY,
-	FIREBASE_APPID,
-	FIREBASE_AUTHDOMAIN,
-	FIREBASE_MESSAGINGSENDERID,
-	FIREBASE_PROJECTID,
-	FIREBASE_STORAGEBUCKET,
+	FIREBASE_API_KEY,
+	FIREBASE_APP_ID,
+	FIREBASE_AUTH_DOMAIN,
+	FIREBASE_MESSAGING_SENDER_ID,
+	FIREBASE_PROJECT_ID,
+	FIREBASE_STORAGE_BUCKET,
 } from './environment'
 
 /**
  * @type {import('firebase/app').FirebaseOptions}
  */
 const firebaseOptions = {
-	apiKey: FIREBASE_APIKEY,
-	authDomain: FIREBASE_AUTHDOMAIN,
-	projectId: FIREBASE_PROJECTID,
-	storageBucket: FIREBASE_STORAGEBUCKET,
-	messagingSenderId: FIREBASE_MESSAGINGSENDERID,
-	appId: FIREBASE_APPID,
+	apiKey: FIREBASE_API_KEY,
+	authDomain: FIREBASE_AUTH_DOMAIN,
+	projectId: FIREBASE_PROJECT_ID,
+	storageBucket: FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
+	appId: FIREBASE_APP_ID,
 }
 
-const app = initializeApp(firebaseOptions)
+if (!apps.length) {
+	initializeApp(firebaseOptions)
+}
 
-export const database = getFirestore(app)
+export const database = firestore()
